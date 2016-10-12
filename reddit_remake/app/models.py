@@ -17,13 +17,15 @@ class Subreddit(models.Model):
         pass
     def daily_avg(self):
         pass
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
     title = models.CharField(max_length = 40)
     description =  models.CharField(max_length = 255)
     body = models.TextField()
-    url = models.URLField(max_length = 250)
+    url = models.URLField(max_length = 250, null=True, blank=True)
     creation_time = models.DateTimeField(auto_now_add=True)
     modification_time = models.DateTimeField(auto_now=True)
     subreddit = models.ForeignKey(Subreddit)
@@ -33,10 +35,14 @@ class Post(models.Model):
         pass
     def is_hot(self):
         pass
-
+    def __str__(self):
+        return self.title
 class Comment(models.Model):
     text = models.TextField()
     user = models.ForeignKey(User, null=True, blank = True)
     post = models.ForeignKey(Post)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.username
