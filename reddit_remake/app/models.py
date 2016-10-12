@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta, timezone
+from django.utils import timezone
+
 
 class Subreddit(models.Model):
     name = models.CharField(max_length = 40)
@@ -8,17 +11,18 @@ class Subreddit(models.Model):
 
     def current_count(self):
         posts = Post.objects.filter(subreddit = self)
-        count = 0
-        for post in posts:
-            count += 1
-        return count
+        return posts.count()
 
     def today_count(self):
-        pass
+        posts = Post.objects.filter(creation_time__gt = (datetime.now() - timedelta(days=1))).filter(subreddit = self)
+        return posts.count()
+
     def daily_avg(self):
-        pass
+        posts = Post.objects.filter(creation_time__gt = (datetime.now() - timedelta(days=7))).filter(subreddit = self)
+        return (posts.count() / 7)
     def __str__(self):
         return self.name
+
 
 
 class Post(models.Model):
@@ -32,8 +36,16 @@ class Post(models.Model):
     user = models.ForeignKey(User, null=True, blank = True)
 
     def is_recent(self):
-        pass
+        first = self.creation_time
+        second = (timezone.now() - timedelta(days=1))
+        if first > second:
+            return True
+        else:
+            return False
+
     def is_hot(self):
+        first = self.creation_time
+        second = (timezone.now() - timedelta)
         pass
     def __str__(self):
         return self.title
