@@ -45,10 +45,17 @@ class Post(models.Model):
 
     def is_hot(self):
         first = self.creation_time
-        second = (timezone.now() - timedelta)
-        pass
+        second = (timezone.now() - timedelta(hours=3))
+        com = Comment.objects.filter(post=self).filter(created_time__gt = (datetime.now() - timedelta(hours=3)))
+        if com.count() > 3:
+            return True
+        else:
+            return False
+
     def __str__(self):
         return self.title
+
+
 class Comment(models.Model):
     text = models.TextField()
     user = models.ForeignKey(User, null=True, blank = True)

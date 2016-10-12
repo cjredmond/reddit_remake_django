@@ -10,6 +10,7 @@ def example_view(request):
     avg = connor.daily_avg()
     x = Post.objects.get(id = 1)
     y = x.is_recent()
+    z = x.is_hot()
 
     context = {
     "sub" : Subreddit.objects.all(),
@@ -17,6 +18,7 @@ def example_view(request):
     "com" : Comment.objects.all(),
     "connor" : answer,
     "avg" : avg,
-    "y" : y
+    "y" : y,
+    "z" : z
     }
     return render(request, "example.html", context)
