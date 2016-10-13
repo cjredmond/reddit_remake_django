@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h2>{{post}}</h2>
+<h4>{{post.body}}</h4>
+{% for com in object_list%}
+
+<p>
+  {{com.text}}
+</p>
+{% endfor %}
+{% endblock %}

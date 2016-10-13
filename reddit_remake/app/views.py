@@ -23,7 +23,13 @@ class SubredditUpdateView(UpdateView):
     success_url = "/subreddits"
     fields = ('name', 'description')
 
+class CommentListView(ListView):
+    model = Comment
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["post"] = Post.objects.get(id=self.kwargs['pk'])
+        return context
 
-
-#get_queryset
+    def get_queryset(self):
+        return Comment.objects.filter(post = self.kwargs['pk'])
