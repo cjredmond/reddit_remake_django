@@ -1,24 +1,29 @@
 from django.shortcuts import render
 from app.models import Post, Comment, Subreddit
+from django.views import View
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView
 
-def example_view(request):
+class SubredditView(ListView):
+    template_name = "subreddits.html"
+    model = Subreddit
 
-    connor = Subreddit.objects.get(id =1)
-    answer = connor.current_count()
-    time = connor.creation_time
-    today = connor.today_count()
-    avg = connor.daily_avg()
-    x = Post.objects.get(id = 1)
-    y = x.is_recent()
-    z = x.is_hot()
+class PostListView(ListView):
+    model = Post
+    def get_queryset(self):
+        return Post.objects.filter(subreddit = self.kwargs['pk'])
 
-    context = {
-    "sub" : Subreddit.objects.all(),
-    "post" : Post.objects.all(),
-    "com" : Comment.objects.all(),
-    "connor" : answer,
-    "avg" : avg,
-    "y" : y,
-    "z" : z
-    }
-    return render(request, "example.html", context)
+class SubredditCreateView(CreateView):
+    model = Subreddit
+    success_url = "/subreddits"
+    fields = ('name', 'description')
+
+class SubredditUpdateView(UpdateView):
+    model = Subreddit
+    success_url = "/subreddits"
+    fields = ('name', 'description')
+
+
+
+
+#get_queryset

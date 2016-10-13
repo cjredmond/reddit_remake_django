@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+      <h1>Subreddits</h1>
+      {% for sub in object_list %}
+      <p>
+        {{ sub.name }} -- {{ sub.description}}
+        <a href="{%url 'post_list_view' sub.id %}">{{sub.name}}</a>
+      </p>
+      {% endfor %}
+        {% endblock %}
