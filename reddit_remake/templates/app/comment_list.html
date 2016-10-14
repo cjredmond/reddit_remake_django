@@ -3,13 +3,19 @@
 {% block content%}
 <h2>{{post}}</h2>
 <h4>{{post.body}}</h4>
+<h5><a href="{% url 'post_update_view' post.id %}">Edit Post</a></h5>
 <p>
-  {{ post.user }} {{ post.is_recent}} {{ post.is_hot }}
+  {{ post.user }}
+  {% if post.is_hot%}
+  <h4>HOT</h4>
+  {% endif %}
 </p>
 {% for com in object_list%}
 
 <p>
-  {{com.text}}
+  {{com.text}} -{{com.user}}
 </p>
+
 {% endfor %}
+<a href="{% url 'comment_create_view' post.id %}">New Comment</a>
 {% endblock %}

@@ -33,7 +33,7 @@ class Post(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
     modification_time = models.DateTimeField(auto_now=True)
     subreddit = models.ForeignKey(Subreddit)
-    user = models.ForeignKey(User, null=True, blank = True)
+    user = models.ForeignKey(User)
     @property
     def is_recent(self):
         first = self.creation_time
@@ -61,7 +61,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     text = models.TextField()
-    user = models.ForeignKey(User, null=True, blank = True)
+    user = models.ForeignKey(User)
     post = models.ForeignKey(Post)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
