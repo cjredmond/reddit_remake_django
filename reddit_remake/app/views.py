@@ -51,6 +51,14 @@ class CommentCreateView(CreateView):
         instance.post = Post.objects.get(id= self.kwargs['pk'])
         return super().form_valid(form)
 
+class CommentUpdateView(UpdateView):
+    model = Comment
+    fields = ('text',)
+    success_url = "/subreddits"
+    #def get_success_url(self, **kwargs):
+        #return reverse('comment_list_view', self.post.id)
+
+
 class SubredditCreateView(CreateView):
     model = Subreddit
     success_url = "/subreddits"
