@@ -3,6 +3,9 @@
 {% block content%}
 <h2>{{post}}</h2>
 <h4>{{post.body}}</h4>
+<p>
+  {{ post.user }} {{ post.is_recent}} {{ post.is_hot }}
+</p>
 {% for com in object_list%}
 
 <p>

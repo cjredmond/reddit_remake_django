@@ -8,7 +8,7 @@ class Subreddit(models.Model):
     name = models.CharField(max_length = 40)
     description = models.CharField(max_length = 40)
     creation_time = models.DateTimeField(auto_now_add=True)
-
+    @property
     def current_count(self):
         posts = Post.objects.filter(subreddit = self)
         return posts.count()
@@ -34,7 +34,7 @@ class Post(models.Model):
     modification_time = models.DateTimeField(auto_now=True)
     subreddit = models.ForeignKey(Subreddit)
     user = models.ForeignKey(User, null=True, blank = True)
-
+    @property
     def is_recent(self):
         first = self.creation_time
         second = (timezone.now() - timedelta(days=1))
@@ -42,7 +42,7 @@ class Post(models.Model):
             return True
         else:
             return False
-
+    @property
     def is_hot(self):
         first = self.creation_time
         second = (timezone.now() - timedelta(hours=3))
@@ -55,7 +55,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    
+
 
 
 

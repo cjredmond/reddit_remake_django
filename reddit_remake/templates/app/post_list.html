@@ -3,7 +3,8 @@
 <h1>afsdfasf</h1>
 {% for post in object_list%}
 <p>
-  {{ post }}  {{ post.creation_time }}
+  <a href="{% url 'comment_list_view' post.id%}">{{post}}</a> {{ post.creation_time }}
+
 </p>
 {% endfor %}
 {% endblock %}
