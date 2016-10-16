@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 import operator
 
 class SubredditView(ListView):
@@ -47,8 +47,11 @@ class PostCreateView(CreateView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    success_url = "/subreddits"
     fields = ('title', 'description', 'body', 'url')
+    def get_success_url(self, **kwargs):
+        target = Post.objects.get(id=self.kwargs['pk'])
+        return reverse_lazy('post_list_view', args=str(target.subreddit.id))
+
 
 class CommentCreateView(CreateView):
     model = Comment
@@ -66,9 +69,11 @@ class CommentCreateView(CreateView):
 class CommentUpdateView(UpdateView):
     model = Comment
     fields = ('text',)
-    success_url = "/subreddits"
-    #def get_success_url(self, **kwargs):
-        #return reverse('comment_list_view', args=self.kwargs['pk']), self.kwargs['ck'] ) )
+    #success_url = "/subreddits"
+    def get_success_url(self, **kwargs):
+        target = Comment.objects.get(id=self.kwargs['pk'])
+        print(target.post,"0"*100)
+        return reverse('comment_list_view', args=str(target.post.id))
 
 
 class SubredditCreateView(CreateView):

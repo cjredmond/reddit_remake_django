@@ -28,7 +28,7 @@
 
 
 <button type="button" class="btn btn-default btn-sm">
-  <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <a href="{% url 'comment_update_view' com.id%}">Edit</a>
+  <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <a href="{% url 'comment_update_view' post.id com.id%}">Edit</a>
 </button>
 </div>
 {% endfor %}
