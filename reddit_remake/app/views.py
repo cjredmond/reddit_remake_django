@@ -6,10 +6,18 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
+import operator
 
 class SubredditView(ListView):
     template_name = "subreddits.html"
     model = Subreddit
+    def get_context_data(self):
+        context = super().get_context_data()
+        subs = Subreddit.objects.all()
+        order = sorted(subs, key=operator.attrgetter('creation_time'))
+        order.reverse()
+        context["twenty"] = order
+        return context
 
 class PostListView(ListView):
     model = Post
@@ -17,6 +25,10 @@ class PostListView(ListView):
     def get_context_data(self):
         context = super().get_context_data()
         context["sub"] = Subreddit.objects.get(id=self.kwargs['pk'])
+        p = Post.objects.filter(subreddit = self.kwargs['pk'])
+        order = sorted(p, key=operator.attrgetter('creation_time'))
+        order.reverse()
+        context["twenty"] = order[:20]
         return context
 
     def get_queryset(self):
@@ -56,7 +68,7 @@ class CommentUpdateView(UpdateView):
     fields = ('text',)
     success_url = "/subreddits"
     #def get_success_url(self, **kwargs):
-        #return reverse('comment_list_view', self.post.id)
+        #return reverse('comment_list_view', args=self.kwargs['pk']), self.kwargs['ck'] ) )
 
 
 class SubredditCreateView(CreateView):

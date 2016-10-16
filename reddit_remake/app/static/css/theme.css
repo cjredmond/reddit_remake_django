@@ -1,0 +1,39 @@
+.links {
+  color: white;
+  background: #0079d3;
+  height: 120px;
+  border: 2px solid blue;
+  font-size: 22px;
+  }
+.container a:link{ color: grey;
+                   font-size: 20px; }
+.container a:visited { color: grey; }
+#top a:link { color: white; }
+#top a:visited { color: white; }
+#top a:link { font-size: 22px;
+              padding-top: 10px;
+            }
+.title {
+  text-align: center;
+  border: solid 1px black;
+}
+.title a:link { float: right ;
+                font-size: 14px;}
+.box {
+  border: 15px solid grey;
+}
+.sub_item {
+  height: 50px;
+  border: solid 1px black
+}
+
+.post_item {
+  height: 50px;
+  border: dotted 1px black;
+}
+.post_item a:link { font-size: 18px; }
+
+.comment_section a:link { font-size: 12px;}
+.comment {
+  border: dotted 1px grey;
+}

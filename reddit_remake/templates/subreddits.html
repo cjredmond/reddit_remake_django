@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
     {% block content %}
+      <div class="title">
+<a href="{%url 'subreddit_create_view'%}">Add a Subreddit</a>
       <h1>Subreddits</h1>
-      {% for sub in object_list %}
-      <div class="panel panel-default">
-  <div class="panel-body">
-        <a href="{%url 'post_list_view' sub.id %}">{{sub.name}}</a> --
-        {{ sub.description}} -- {{ sub.current_count }}
-
-      </div>
     </div>
+      {% for sub in twenty %}
+  <div class="sub_item">
+        <a href="{%url 'post_list_view' sub.id %}">{{sub.name}}</a> --
+        {{ sub.description}} -- {{ sub.current_count }} posts
+  </div>
+
+
       {% endfor %}
         {% endblock %}

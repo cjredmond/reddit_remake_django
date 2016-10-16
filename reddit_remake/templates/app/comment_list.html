@@ -1,22 +1,37 @@
 {% extends 'base.html'%}
 
 {% block content%}
-<h2>{{post}}</h2>
-<h4>{{post.body}}</h4>
+<div class="title">
+
 <h5><a href="{% url 'post_update_view' post.id %}">Edit Post</a></h5>
+
+
+<h3>{{post}}</h3>  -{{ post.user }}</div>
+<div class="post">
+{{post.body}}</div>
+
+
 <p>
-  {{ post.user }}
+
   {% if post.is_hot%}
   <h4>HOT</h4>
   {% endif %}
 </p>
+<div class="comment_section">
+
+
 {% for com in object_list%}
 
-<p>
-  <a href="{% url 'comment_update_view' com.id%}">{{com.text}}</a>
-  {{com.text}} -{{com.user}}
-</p>
+<div class="comment">
+  {{com.text}} -{{com.user}} <br>
 
+
+
+<button type="button" class="btn btn-default btn-sm">
+  <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <a href="{% url 'comment_update_view' com.id%}">Edit</a>
+</button>
+</div>
 {% endfor %}
 <a href="{% url 'comment_create_view' post.id %}">New Comment</a>
+</div>
 {% endblock %}

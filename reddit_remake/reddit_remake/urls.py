@@ -16,5 +16,7 @@ urlpatterns = [
     url(r'^create_user/$', UserCreateView.as_view(), name="user_create_view"),
     url(r'^posts/(?P<pk>\d+)/update/$', PostUpdateView.as_view(), name="post_update_view"),
     url(r'^', include('django.contrib.auth.urls')),
+    #url(r'^posts/(?P<pk>\d+)/comment_update/(?P<ck>\d+)$', CommentUpdateView.as_view(), name="comment_update_view"),
     url(r'^comment_update/(?P<pk>\d+)$', CommentUpdateView.as_view(), name="comment_update_view"),
+
 ]
