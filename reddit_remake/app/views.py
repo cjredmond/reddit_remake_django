@@ -36,7 +36,7 @@ class PostListView(ListView):
 
 class PostCreateView(CreateView):
     model = Post
-    success_url = "http://localhost:8000/"
+    success_url = "/"
     fields = ('title', 'description', 'body', 'url')
 
     def form_valid(self, form):
@@ -69,7 +69,7 @@ class CommentCreateView(CreateView):
 class CommentUpdateView(UpdateView):
     model = Comment
     fields = ('text',)
-    #success_url = "/subreddits"
+    #success_url = "/"
     def get_success_url(self, **kwargs):
         target = Comment.objects.get(id=self.kwargs['pk'])
         return reverse('comment_list_view', args=str(target.post.id))
@@ -77,12 +77,12 @@ class CommentUpdateView(UpdateView):
 
 class SubredditCreateView(CreateView):
     model = Subreddit
-    success_url = "http://localhost:8000/"
+    success_url = "/"
     fields = ('name', 'description')
 
 class SubredditUpdateView(UpdateView):
     model = Subreddit
-    success_url = "http://localhost:8000/"
+    success_url = "/"
     fields = ('name', 'description')
 
 class CommentListView(ListView):
@@ -99,4 +99,4 @@ class CommentListView(ListView):
 class UserCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = "http://localhost:8000/" #show reverse_lazy
+    success_url = "/" #show reverse_lazy
