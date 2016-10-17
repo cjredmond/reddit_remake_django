@@ -6,7 +6,7 @@ CommentListView, PostCreateView, CommentCreateView, UserCreateView, PostUpdateVi
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^subreddits/$', SubredditView.as_view(), name="subreddits_view"),
+    url(r'^$', SubredditView.as_view(), name="subreddits_view"),
     url(r'^subreddits/(?P<pk>\d+)/$', PostListView.as_view(), name="post_list_view"),
     url(r'^subreddits/create/$', SubredditCreateView.as_view(), name="subreddit_create_view"),
     url(r'^subreddits/(?P<pk>\d+)/update/$', SubredditUpdateView.as_view(), name="subreddit_update_view"),
