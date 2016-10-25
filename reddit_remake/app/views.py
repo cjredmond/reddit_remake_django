@@ -58,7 +58,8 @@ class CommentCreateView(CreateView):
     fields = ('text',)
 
     def get_success_url(self, **kwargs):
-        return reverse('comment_list_view', args=self.kwargs['pk'])
+        target = Comment.objects.get(id=self.kwargs['pk'])
+        return reverse_lazy('comment_list_view', args=(target.id,))
 
     def form_valid(self,form):
         instance = form.save(commit = False)

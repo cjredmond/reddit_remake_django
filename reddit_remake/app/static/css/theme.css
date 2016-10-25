@@ -16,6 +16,9 @@
 .title {
   text-align: center;
   border: solid 1px black;
+  padding-right: 10px;
+  padding-left: 10px;
+
 }
 .title a:link { float: right ;
                 font-size: 14px;}
@@ -24,16 +27,24 @@
 }
 .sub_item {
   height: 50px;
-  border: solid 1px black
+  border: solid 1px black;
+  padding-left: 10px;
 }
 
+.post {
+  padding-left: 10px;
+}
 .post_item {
   height: 50px;
   border: dotted 1px black;
+  padding-left: 10px;
 }
 .post_item a:link { font-size: 18px; }
+
+
 
 .comment_section a:link { font-size: 12px;}
 .comment {
   border: dotted 1px grey;
+  padding-left: 10px;
 }
