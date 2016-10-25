@@ -1,18 +1,18 @@
-{% extends 'base.html'%}
-{% block content%}
+{% extends 'base.html' %}
+{% block content %}
 <div class="title">
 
 
 <a href="{% url 'post_create_view' sub.id %}">New Post</a>
-<h2>{{sub.name}}</h2>
+<h2>{{ sub.name }}</h2>
 </div>
-{% for post in twenty%}
+{% for post in twenty %}
 
 <div class="post_item">
 
 
-  <a href="{% url 'comment_list_view' post.id%}">{{post}}</a>
-  {%if post.is_hot%}
+  <a href="{% url 'comment_list_view' post.id%}">{{ post }}</a>
+  {% if post.is_hot %}
   <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
   {% endif %}
   <br> {{ post.creation_time }}

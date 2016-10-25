@@ -1,12 +1,12 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 
-{% block content%}
+{% block content %}
 
 <h1>Create a Subreddit</h1>
 <form class="" action="" method="post">
   {% csrf_token %}
-  {{form}}
+  {{ form.as_p }}
   <input type="submit" name="" value="submit">
 </form>
 
-{% endblock%}
+{% endblock %}
